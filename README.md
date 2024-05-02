@@ -18,12 +18,18 @@ cd gameblog-pwa
 npm install
 
 
-3. Lancer l'application :
-Pour démarrer l'application sur votre machine locale, utilisez la commande suivante :
+3. Compilez le projet avec :
+
+npm run build
+
+
+4. Lancer l'application :
 
 npm start
 
+
 Accédez à http://localhost:8080 pour voir l'application.
+
 
 Caractéristiques
 Notifications Push : Pour les dernières actualités.
