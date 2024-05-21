@@ -25,12 +25,23 @@ const ArticlePage: React.FC = () => {
     }
   }, [id]);
 
+  const handleDownload = async () => {
+    if (article) {
+      const cache = await caches.open('articles-cache');
+      await cache.put(`/article/${article.id}`, new Response(JSON.stringify(article), {
+        headers: { 'Content-Type': 'application/json' }
+      }));
+      alert('Article téléchargé pour être consulté hors ligne.');
+    }
+  };
+
   if (!article) return <div>Loading...</div>;
 
   return (
     <div>
       <h1>{article.title}</h1>
       <p>{article.content}</p>
+      <button onClick={handleDownload}>Télécharger</button>
     </div>
   );
 }
