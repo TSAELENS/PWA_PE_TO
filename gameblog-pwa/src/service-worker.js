@@ -38,7 +38,6 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Interception des requêtes réseau
 self.addEventListener('fetch', event => {
   if (event.request.method === 'GET') {
     event.respondWith(
@@ -48,12 +47,29 @@ self.addEventListener('fetch', event => {
             return response;
           }
           return fetch(event.request).then(networkResponse => {
-            return caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, networkResponse.clone());
+            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
               return networkResponse;
+            }
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, responseToCache);
             });
+            return networkResponse;
           });
         })
     );
   }
+});
+
+
+self.addEventListener('push', function(event) {
+  const data = event.data.json();
+  const options = {
+    body: data.body,
+    icon: 'logo192.png',
+    badge: 'logo192.png'
+  };
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
 });
