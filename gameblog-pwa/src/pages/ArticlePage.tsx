@@ -7,7 +7,6 @@ interface Article {
   content: string;
 }
 
-// Créez des articles factices
 const mockArticles: Article[] = [
   { id: 1, title: 'Mock Article 1', content: 'Content of mock article 1' },
   { id: 2, title: 'Mock Article 2', content: 'Content of mock article 2' },
@@ -38,10 +37,10 @@ const ArticlePage: React.FC = () => {
   if (!article) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{article.title}</h1>
-      <p>{article.content}</p>
-      <button onClick={handleDownload}>Télécharger</button>
+    <div className="article-page">
+      <h1 className="article-page__title">{article.title}</h1>
+      <p className="article-page__content">{article.content}</p>
+      <button className="article-page__download-button" onClick={handleDownload}>Télécharger</button>
     </div>
   );
 }

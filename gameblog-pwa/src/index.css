@@ -143,3 +143,37 @@ footer p {
   line-height: 1.4;
 }
 
+.article-page {
+  padding: 2rem;
+  background-color: #fff;
+  max-width: 800px;
+  margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-page__title {
+  font-size: 2rem;
+  color: #e8491d;
+  margin-bottom: 1rem;
+}
+
+.article-page__content {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.article-page__download-button {
+  background-color: #e8491d;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.article-page__download-button:hover {
+  background-color: #bf360c;
+}
