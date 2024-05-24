@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ArticlePage from './pages/ArticlePage';
@@ -6,6 +6,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.ready.then(function(registration) {
@@ -18,9 +20,7 @@ const App: React.FC = () => {
                   userVisibleOnly: true,
                   applicationServerKey: 'VOTRE_PUBLIC_VAPID_KEY'
                 }).then(function(subscription) {
-                  console.log('Subscribed:', subscription);
-                }).catch(function(error) {
-                  console.error('Subscription error:', error);
+                  console.log('Subscription:', subscription);
                 });
               }
             });
@@ -29,12 +29,12 @@ const App: React.FC = () => {
       });
     }
   }, []);
-  
+
   return (
     <Router>
-      <Header />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage searchTerm={searchTerm} />} />
         <Route path="/article/:id" element={<ArticlePage />} />
       </Routes>
       <Footer />

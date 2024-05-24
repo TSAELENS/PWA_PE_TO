@@ -13,18 +13,26 @@ const mockArticles: Article[] = [
   { id: 3, title: 'Mock Article 3', summary: 'Summary of mock article 3' },
 ];
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  searchTerm: string;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ searchTerm }) => {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
     setArticles(mockArticles);
   }, []);
 
+  const filteredArticles = articles.filter(article =>
+    article.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <main className="homepage">
       <h1 className="homepage__title">À la une</h1>
       <div className="homepage__articles">
-        {articles.map(article => (
+        {filteredArticles.map(article => (
           <ArticlePreview key={article.id} article={article} />
         ))}
       </div>
