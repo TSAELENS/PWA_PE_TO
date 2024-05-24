@@ -11,9 +11,11 @@ interface ArticlePreviewProps {
 
 const ArticlePreview: React.FC<ArticlePreviewProps> = ({ article }) => {
   return (
-    <div>
-      <h2><Link to={`/article/${article.id}`}>{article.title}</Link></h2>
-      <p>{article.summary}</p>
+    <div className="article-preview">
+      <h2 className="article-preview__title">
+        <Link to={`/article/${article.id}`}>{article.title}</Link>
+      </h2>
+      <p className="article-preview__summary">{article.summary}</p>
     </div>
   );
 }

@@ -7,7 +7,6 @@ interface Article {
   summary: string;
 }
 
-// Créez des articles factices
 const mockArticles: Article[] = [
   { id: 1, title: 'Mock Article 1', summary: 'Summary of mock article 1' },
   { id: 2, title: 'Mock Article 2', summary: 'Summary of mock article 2' },
@@ -18,19 +17,18 @@ const HomePage: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    // Utilisez les articles factices au lieu de faire une requête API
     setArticles(mockArticles);
   }, []);
 
   return (
-    <div>
-      <h1>À la une</h1>
-      <div>
+    <main className="homepage">
+      <h1 className="homepage__title">À la une</h1>
+      <div className="homepage__articles">
         {articles.map(article => (
           <ArticlePreview key={article.id} article={article} />
         ))}
       </div>
-    </div>
+    </main>
   );
 }
 
